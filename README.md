@@ -3,14 +3,6 @@
 Script to add CCID users to MediaWiki
 
 
-## Deploy Changes
-
-To deploy changes:
-1. Log into server
-2. `cd /srv/CCID-MediaWiki`
-3. `sudo git pull`
-
-
 ## Field Mappings
 
 Assuming the following data from [creativecommons/CCID-cas][ccid-cas]:
