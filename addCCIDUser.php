@@ -28,7 +28,7 @@ class AddCCIDUser extends Maintenance {
 
         $this->addArg(
             'global',
-            'CCID global identifier of new user'
+            'CCID global identifier of new user (username: CCID- + global)'
         );
         $this->addArg(
             'email',
@@ -51,7 +51,7 @@ class AddCCIDUser extends Maintenance {
         $u = User::newFromName( $ccid_name );
         // Create a new account if the user does not exists
         if ($u->getID() != 0) {
-            $this->error('User already exists', true);
+            $this->error( 'User already exists', true );
             exit(1);
         } else {
             // Create the user
