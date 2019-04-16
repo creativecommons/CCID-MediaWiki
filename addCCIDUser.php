@@ -34,7 +34,7 @@ class AddCCIDUser extends Maintenance {
         global $CASAuth;
 
         if (! isset( $CASAuth )) {
-            $this->error('$CASAuth not set in LocalSettings.php', true);
+            $this->error( '$CASAuth not set in LocalSettings.php', true );
         }
 
         $nickname = $global = $this->getArg( 0 );
@@ -47,11 +47,10 @@ class AddCCIDUser extends Maintenance {
             $this->error('User already exists', true);
             exit(1);
         } else {
-            //$nickname = $attr['nickname'];
             // Create the user
             $u->addToDatabase();
-            $u->setRealName($nickname);
-            $u->setEmail($casuid);
+            $u->setRealName( $nickname );
+            $u->setEmail( $casuid );
             $u->confirmEmail();
             //PwdSecret is used to salt the casuid, which is then used to
             //  create an md5 hash which becomes the password
