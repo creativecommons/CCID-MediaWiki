@@ -32,7 +32,7 @@ class AddCCIDUser extends Maintenance {
         );
         $this->addArg(
             'email',
-            'CCID email of new user (will be used as the username as well)'
+            'CCID email of new user (will used in username)'
         );
     }
 

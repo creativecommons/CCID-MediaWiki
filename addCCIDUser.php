@@ -28,7 +28,7 @@ class AddCCIDUser extends Maintenance {
 
         $this->addArg(
             'global',
-            'CCID global identifier of new user (username: CCID- + global)'
+            'CCID global identifier of new user (will be used in username)'
         );
         $this->addArg(
             'email',
