@@ -23,11 +23,11 @@ require_once __DIR__ . '/Maintenance.php';
 class AddCCIDUser extends Maintenance {
 
     public function __construct() {
-		parent::__construct();
-		$this->mDescription = "Create a new CCID user account.";
+        parent::__construct();
+        $this->mDescription = 'Create a new CCID user account.';
 
-        $this->addArg( "global", "CCID global identifier of new user" );
-        $this->addArg( "email", "CCID email of new user" );
+        $this->addArg( 'global', 'CCID global identifier of new user' );
+        $this->addArg( 'email', 'CCID email of new user' );
     }
 
     public function execute() {
@@ -44,7 +44,7 @@ class AddCCIDUser extends Maintenance {
         $u = User::newFromName( $ccid_name );
         // Create a new account if the user does not exists
         if ($u->getID() != 0) {
-            $this->error("User already exists", true);
+            $this->error('User already exists', true);
             exit(1);
         } else {
             //$nickname = $attr['nickname'];
@@ -53,7 +53,9 @@ class AddCCIDUser extends Maintenance {
             $u->setRealName($nickname);
             $u->setEmail($casuid);
             $u->confirmEmail();
-            $u->setPassword( md5($casuid.$CASAuth["PwdSecret"]) ); //PwdSecret is used to salt the casuid, which is then used to create an md5 hash which becomes the password
+            //PwdSecret is used to salt the casuid, which is then used to
+            //  create an md5 hash which becomes the password
+            $u->setPassword( md5($casuid.$CASAuth['PwdSecret']) );
             $u->setToken();
             $u->saveSettings();
             // Update user count
@@ -63,5 +65,5 @@ class AddCCIDUser extends Maintenance {
     }
 }
 
-$maintClass = "AddCCIDUser";
+$maintClass = 'AddCCIDUser';
 require_once RUN_MAINTENANCE_IF_MAIN;
