@@ -24,10 +24,16 @@ class AddCCIDUser extends Maintenance {
 
     public function __construct() {
         parent::__construct();
-        $this->mDescription = 'Create a new CCID user account.';
+        $this->mDescription = 'Create a new CCID user account for Wiki.';
 
-        $this->addArg( 'global', 'CCID global identifier of new user' );
-        $this->addArg( 'email', 'CCID email of new user' );
+        $this->addArg(
+            'global',
+            'CCID global identifier of new user'
+        );
+        $this->addArg(
+            'email',
+            'CCID email of new user'
+        );
     }
 
     public function execute() {
@@ -39,6 +45,7 @@ class AddCCIDUser extends Maintenance {
 
         $nickname = $global = $this->getArg( 0 );
         $casuid = $email = $this->getArg( 1 );
+
         $ccid_name = 'CCID-' . $global;
 
         $u = User::newFromName( $ccid_name );

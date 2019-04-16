@@ -27,10 +27,13 @@ class AddCCIDUser extends Maintenance {
         $this->mDescription = 'Create a new CCID user account for Teamspace.';
 
         $this->addArg(
+            'global',
+            'CCID global identifier of new user'
+        );
+        $this->addArg(
             'email',
             'CCID email of new user (will be used as the username as well)'
         );
-        $this->addArg( 'name', 'Real name of user' );
     }
 
     public function execute() {
@@ -40,8 +43,9 @@ class AddCCIDUser extends Maintenance {
             $this->error( '$CASAuth not set in LocalSettings.php', true );
         }
 
-        $casuid = $email = $this->getArg( 0 );
-        $name = $global = $this->getArg( 1 );
+        $nickname = $global = $this->getArg( 0 );
+        $casuid = $email = $this->getArg( 1 );
+
         $ccid_name = ucfirst ( $email );
 
         $u = User::newFromName( $ccid_name );
@@ -52,7 +56,7 @@ class AddCCIDUser extends Maintenance {
         } else {
             // Create the user
             $u->addToDatabase();
-            $u->setRealName( $name );
+            $u->setRealName( $nickname );
             $u->setEmail( $casuid );
             $u->confirmEmail();
             //PwdSecret is used to salt the casuid, which is then used to
